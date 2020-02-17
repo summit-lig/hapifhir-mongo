@@ -41,13 +41,13 @@ services:
        #You can provide HTTP Auth, according to your mongodb config
       #- HTTP_AUTH=exporter:s3cr3tpassw0rd
 
-  # fhir:
-  #     image: myfhirmongo
-  #     restart: always
-  #     ports:
-  #       - 8183:8183
-  #     links:
-  #       - mongo
+  fhir:
+    image: hapifhir-mongo
+    restart: always
+    ports:
+      - 8184:8184
+    links:
+      - mongo
 
   # jmx-exporter:
   #   image: bitnami/jmx-exporter:0
