@@ -1,0 +1,60 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+    - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGODB_DATABASE: ccri-fhirStarter
+      
+      MONGODB_USER: exporter
+      #MONGODB_DATABASE: "${dbname_env}"
+      MONGODB_PASS: s3cr3tpassw0rd
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+
+  mongodb-exporter:
+    #build: .
+    image: mongodb_exporter
+    restart: always
+    ports:
+      - 9001:9001
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URL=mongodb://mongo:27017
+      #- MONGODB_URL=mongo
+       #You can provide HTTP Auth, according to your mongodb config
+      #- HTTP_AUTH=exporter:s3cr3tpassw0rd
+
+  # fhir:
+  #     image: myfhirmongo
+  #     restart: always
+  #     ports:
+  #       - 8183:8183
+  #     links:
+  #       - mongo
+
+  # jmx-exporter:
+  #   image: bitnami/jmx-exporter:0
+  #   ports:
+  #     - 5556:5556
+  #   environment:
+  #     MONGODB_URI: localhost:27017
+  #     HTTP_AUTH: root:example
+  #   links: 
+  #     - mongo
