@@ -5,3 +5,8 @@ This repository contains a basic CRUD hapifhir implemantation with mongo DB, whi
 Build with Dockerfile
 
 docker build -t hapifhir-mongo .
+
+Test the docker image  
+
+docker run --rm  -p 8184:8184 hapifhir-mongo
+
