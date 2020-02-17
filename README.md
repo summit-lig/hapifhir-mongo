@@ -1,4 +1,4 @@
-# hapithir-mongo
+# hapithir
 
 This repository contains a basic CRUD hapifhir implemantation with mongo DB, which can be built into a Docker image. The name used for building must be match the one declared in the docker-compose file for monitoring.
 
@@ -10,3 +10,8 @@ Test the docker image
 
 docker run --rm  -p 8184:8184 hapifhir-mongo
 
+
+# mongo
+
+Mongo Express is used for visualizing and explore data, the endpoint defined is 
+http://localhost:8081
